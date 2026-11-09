@@ -51,5 +51,43 @@ const groups={homestay:'homestayFields',jeep:'jeepFields',souvenirs:'souvenirsFi
 $('category').addEventListener('change',()=>{Object.values(groups).forEach(id=>$(id).classList.add('hidden')); const g=groups[$('category').value];if(g)$(g).classList.remove('hidden');});
 const num=id=>$(id).value?Number($(id).value):undefined;
 $('join').addEventListener('submit',async(e)=>{e.preventDefault();let cat=$('category').value; const data={business_category:cat,owner_name:$('owner').value.trim(),business_name:$('business').value.trim(),whatsapp:$('wa').value.trim(),village:$('village').value.trim(),address_landmark:$('address').value.trim(),referral_code:$('referral').value.trim()||undefined,room_count:num('rooms'),guest_capacity:num('guests'),vehicle_count:num('vehicles'),passenger_capacity:num('passengers'),product_types:$('products').value.trim()||undefined,experience_type:$('experience').value.trim()||undefined,visit_capacity:num('visitors'),guiding_areas:$('areas').value.trim()||undefined,group_capacity:num('group'),terms_version:'v1.2',privacy_version:'v1.2',acknowledged_terms:true,privacy_notice_acknowledged:true,turnstile_token:window.fprsTurnstileToken||''};if((cat==='homestay'&&(!data.room_count||!data.guest_capacity))||(cat==='jeep'&&(!data.vehicle_count||!data.passenger_capacity))||(cat==='souvenirs'&&!data.product_types)||(cat==='agrotourism'&&(!data.experience_type||!data.visit_capacity))||(cat==='local_guide'&&(!data.guiding_areas||!data.group_capacity))){$('result').textContent='Lengkapi data tambahan sesuai kategori usaha.';return;}
-$('submit').disabled=true;$('result').textContent='Mengirim pendaftaran...';try{const res=await fetch('/api/public/applications',{method:'POST',headers:{'content-type':'application/json','idempotency-key':crypto.randomUUID()},body:JSON.stringify(data)});const json=await res.json();if(!res.ok)throw Error(json?.error?.message||'Pendaftaran belum dapat diproses');const code=json?.data?.[0]?.public_code||json?.data?.public_code||'Tersimpan';$('result').className='success';$('result').textContent='Pendaftaran berhasil! Kode Anda: '+code+'. Simpan kode ini dan hubungi operator melalui WhatsApp.';$('join').reset();Object.values(groups).forEach(id=>$(id).classList.add('hidden'));}catch(err){$('result').className='error';$('result').textContent=err.message||'Koneksi bermasalah';}finally{$('submit').disabled=false;}});
+$('submit').disabled=true;$('result').textContent='Mengirim pendaftaran...';try{const res=await fetch('/api/public/applications',{method:'POST',headers:{'content-type':'application/json','idempotency-key':crypto.randomUUID()},body:JSON.stringify(data)});const json=await res.json();if(!res.ok)throw Error(json?.error?.message||'Pendaftaran belum dapat diproses');const code=json?.data?.[0]?.public_code||json?.data?.public_code;
+if(!code)throw Error('Kode pendaftaran belum diterima. Hubungi operator sebelum mengirim ulang.');
+const labels={homestay:'Homestay / Penginapan',jeep:'Jeep Wisata',souvenirs:'Oleh-oleh',agrotourism:'Agrowisata',local_guide:'Pemandu Lokal'};
+const lines=[
+'*KONFIRMASI PENDAFTARAN FOUNDING PARTNER DIENGINEP*',
+'',
+'Nomor Pendaftaran: *'+code+'*',
+'Jenis usaha: '+(labels[data.business_category]||cat),
+'Nama pemilik: '+data.owner_name,
+'Nama usaha: '+data.business_name,
+'WhatsApp: '+data.whatsapp,
+'Desa / area: '+data.village,
+'Alamat / patokan: '+data.address_landmark,
+data.referral_code?'Kode referral: '+data.referral_code:null,
+cat==='homestay'?'Jumlah kamar: '+data.room_count:null,
+cat==='homestay'?'Kapasitas tamu: '+data.guest_capacity:null,
+cat==='jeep'?'Jumlah kendaraan: '+data.vehicle_count:null,
+cat==='jeep'?'Kapasitas penumpang: '+data.passenger_capacity:null,
+cat==='souvenirs'?'Produk utama: '+data.product_types:null,
+cat==='agrotourism'?'Jenis pengalaman: '+data.experience_type:null,
+cat==='agrotourism'?'Kapasitas pengunjung: '+data.visit_capacity:null,
+cat==='local_guide'?'Wilayah pemanduan: '+data.guiding_areas:null,
+cat==='local_guide'?'Kapasitas rombongan: '+data.group_capacity:null,
+'',
+'Pendaftaran awal sudah tersimpan di sistem dan GRATIS.',
+'Mohon bantu proses seleksi dan verifikasi usaha saya.',
+'',
+'Terima kasih.'
+].filter(x=>x!==null);
+const waUrl='https://wa.me/6285952839393?text='+encodeURIComponent(lines.join('\\n'));
+$('result').className='success';
+$('result').textContent='';
+const title=document.createElement('strong');title.textContent='Pendaftaran berhasil! ';
+const details=document.createElement('span');details.textContent='Kode: '+code+'. Anda akan dialihkan ke WhatsApp untuk mengirim konfirmasi.';
+const link=document.createElement('a');link.href=waUrl;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Buka WhatsApp jika tidak otomatis terbuka';link.style.cssText='display:block;font-weight:700;text-decoration:underline;margin-top:10px;';
+$('result').append(title,details,link);
+$('join').reset();Object.values(groups).forEach(id=>$(id).classList.add('hidden'));
+setTimeout(()=>{window.location.assign(waUrl);},900);
+}catch(err){$('result').className='error';$('result').textContent=err.message||'Koneksi bermasalah';}finally{$('submit').disabled=false;}});
 </script></body></html>
