@@ -24,7 +24,7 @@ export async function onRequestPost({request,env}){
   const payload={...d,whatsapp_e164:"+62"+d.whatsapp.slice(1)};
   delete payload.turnstile_token;
   try {
-    const base=env.SUPABASE_URL.replace(/\\/$/,"");
+    const base=env.SUPABASE_URL.replace(/\/$/,"");
     const key=env.SUPABASE_SECRET_KEY;
     const headers={"apikey":key,"content-type":"application/json"};
     const response=await fetch(base+"/rest/v1/rpc/submit_partner_application",{
@@ -68,9 +68,9 @@ function emailText(data,code) {
     ["Versi ketentuan",data.terms_version],
     ["Versi privasi",data.privacy_version]
   ];
-  return "DIENGINEP - BERKAS PENDAFTARAN FOUNDING PARTNER\\n\\n"
-    +fields.filter(([,value])=>value!==undefined&&value!==null&&String(value)!=="").map(([name,value])=>name+": "+String(value)).join("\\n")
-    +"\\n\\nPendaftaran awal GRATIS. Jangan meminta kontribusi sebelum lulus seleksi, verifikasi dan perjanjian.";
+  return "DIENGINEP - BERKAS PENDAFTARAN FOUNDING PARTNER\n\n"
+    +fields.filter(([,value])=>value!==undefined&&value!==null&&String(value)!=="").map(([name,value])=>name+": "+String(value)).join("\n")
+    +"\n\nPendaftaran awal GRATIS. Jangan meminta kontribusi sebelum lulus seleksi, verifikasi dan perjanjian.";
 }
 
 async function notifyAdmin({env,base,headers,payload,code}) {
