@@ -1,15 +1,40 @@
-# DiengInep — FPRS
+# DiengInep — Founding Partner Registration System
 
-Repository untuk website pendaftaran Founding Partner DiengInep.
+## Status per 9 November 2026
 
-## Status
-Source bootstrap Cloudflare Pages. Pendaftaran publik harus nonaktif (`REGISTRATION_ENABLED=false`) sampai migrasi Supabase, keamanan, legal, dan uji penerimaan selesai. Jangan unggah data pribadi pendaftar atau kredensial ke repository publik.
+- Website pendaftaran publik dan halaman informasi: **sudah masuk repository, siap dihubungkan ke Cloudflare Pages untuk preview**.
+- Database awal project Supabase `dienginep`: **migrasi diterapkan dan uji RPC berhasil dalam transaksi rollback**.
+- RLS diaktifkan; akses `anon` dan `authenticated` ke tabel sensitif dicabut.
+- Cloudflare deployment, secret, domain, Turnstile: **belum dikonfigurasi**.
+- Dashboard admin, alur seleksi, reservasi slot, pembayaran manual dan aktivasi: **belum siap produksi**, merupakan fase berikutnya.
+- Penerimaan pendaftaran real: **nonaktif sampai launch gate lolos**.
 
-## Target
-- Domain: `mitra.dienginep.my.id`
-- GitHub: `desainindongmas/dienginep`
-- Supabase: project `dienginep` (org Aturbudgetku), ref `ovwjrqcjwrsnsvsogjco`
-- Registrasi: gratis; seleksi dan verifikasi lebih dahulu; pembayaran manual Rp125.000 hanya setelah homestay disetujui. Enam usaha wisata pilot gratis tanpa komisi.
+## Business baseline
+14 homestay lokal; 2 jeep, 2 oleh-oleh, 1 agrowisata, 1 pemandu lokal. Registrasi gratis → pemeriksaan → verifikasi → persetujuan → perjanjian → homestay transfer manual Rp125.000 → verifikasi pembayaran → aktivasi. Mitra wisata pilot Rp0, komisi 0%.
 
-## Source master
-Paket kode FPRS MVP v0.1 tersedia sebagai arsip pada percakapan ChatGPT proyek. Backend dan dashboard belum boleh dinyatakan production-ready tanpa pengujian end-to-end.
+## Cloudflare Pages (Git)
+
+| Parameter | Nilai |
+|---|---|
+| Repository | `desainindongmas/dienginep` |
+| Branch | `main` |
+| Framework preset | None |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Root directory | / (root repo) |
+| Intended custom domain | `mitra.dienginep.my.id` |
+
+Build output hanya memuat berkas dari `site/`. Folder `functions/` otomatis terdeteksi untuk Pages Functions ketika deploy dengan Git integration.
+
+### Environment variables dan secrets
+
+- `SUPABASE_URL=https://ovwjrqcjwrsnsvsogjco.supabase.co` (plaintext)
+- `SUPABASE_SECRET_KEY` (**secret**, server only)
+- `REGISTRATION_ENABLED=false` (plaintext)
+- `LEGAL_DOCS_APPROVED=false` (plaintext)
+- `TURNSTILE_SITE_KEY` (public site key)
+- `TURNSTILE_SECRET_KEY` (**secret**)
+
+Never commit credentials, payment account numbers, KTP, applicant records or access tokens. Never expose the secret key to browser code. Registration remains closed by design until config and compliance checks pass.
+
+See [public-deployment.md](public-deployment.md) for full DNS, Pages, and go-live instructions.
