@@ -80,7 +80,7 @@ cat==='local_guide'?'Kapasitas rombongan: '+data.group_capacity:null,
 '',
 'Terima kasih.'
 ].filter(x=>x!==null);
-const waUrl='https://wa.me/6285952839393?text='+encodeURIComponent(lines.join('\\n'));
+const waUrl='https://wa.me/6285952839393?text='+encodeURIComponent(lines.join('\n'));
 $('result').className='success';
 $('result').textContent='';
 const title=document.createElement('strong');title.textContent='Pendaftaran berhasil! ';
