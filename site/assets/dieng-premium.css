@@ -1,0 +1,58 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+:root{--pine:#103c30;--forest:#1a5a46;--gold:#dfa944;--ivory:#f8f5ed;--stroke:#dcded4}
+html{scroll-behavior:smooth}body{font-family:'DM Sans',system-ui,sans-serif!important;color:var(--pine)!important;background:var(--ivory)!important;overflow-x:hidden}
+header{position:sticky;top:0;z-index:20;backdrop-filter:blur(18px);background:rgba(250,248,241,.91)!important;display:flex;align-items:center;min-height:88px;padding:12px max(6vw,calc((100vw - 1150px)/2))!important;gap:22px;box-shadow:0 5px 24px rgba(10,48,34,.05);border-bottom:1px solid #e7e8dd!important}
+header>a{display:inline-flex;align-items:center;gap:14px;line-height:1}
+header>a:after{content:'Dari Warga Dieng, untuk Warga Dieng.';font-size:11px;letter-spacing:.03em;max-width:160px;line-height:1.4;font-weight:600;color:#4f665a}
+.brand-logo{display:block;width:86px;height:64px;object-fit:contain;object-position:left center}
+header nav{margin-left:auto;display:flex;gap:20px;align-items:center}
+header nav a{margin:0!important;color:#24483a;font-size:.92rem!important;font-weight:700}
+header nav a:last-child{border-radius:50px;padding:12px 19px;background:#e1ac4c;color:#1e493a;box-shadow:0 10px 30px #be8f3b30}
+.wrap{max-width:1160px!important}
+.hero{position:relative;padding:0!important;overflow:hidden;background:#132f29!important;isolation:isolate;min-height:700px}
+.hero:before{content:'';position:absolute;inset:0;z-index:-2;background-image:linear-gradient(95deg,rgba(11,48,37,.94) 6%,rgba(11,48,37,.72) 48%,rgba(11,48,37,.12) 100%),url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Sunrise_di_Bukit_Sikunir.jpg/1280px-Sunrise_di_Bukit_Sikunir.jpg');background-size:cover;background-position:center 42%;transform:scale(1.04);animation:slow-pan 22s ease-in-out infinite alternate}
+.hero:after{content:'';position:absolute;inset:auto 0 0;height:150px;background:linear-gradient(0deg,#133d31a0,transparent);z-index:-1}
+.hero>.wrap{position:relative;padding:85px 0 100px;max-width:1160px!important}
+.hero .eyebrow,.hero [class*=eyebrow]{color:#f2cb79;letter-spacing:.19em;font-weight:700;font-size:.72rem;text-transform:uppercase}
+.hero h1{font-family:'Playfair Display',Georgia,serif;font-weight:600!important;max-width:800px;font-size:clamp(2.75rem,5.8vw,5.55rem)!important;letter-spacing:-.038em!important;line-height:1.12!important;color:#fff!important;text-wrap:balance}
+.hero p{font-size:1.13rem!important;line-height:1.8!important;color:#f0f0e6!important;max-width:680px!important}
+.hero .btn{border-radius:999px!important;background:#e7b65c!important;box-shadow:0 12px 36px #0002!important;transition:transform .25s}
+.hero .btn:hover{transform:translateY(-3px)}
+.hero .stats{margin-top:38px!important;max-width:530px!important}
+.hero .stat{background:#fffef314!important;backdrop-filter:blur(12px);border:1px solid #ffffff50!important;border-radius:20px!important}
+.hero .stat b{color:#f9d58c!important}
+.hero .stat span{color:#eff0e3!important}
+.section{padding-top:76px!important;padding-bottom:65px!important}
+.section h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2.1rem,3.5vw,3.2rem)!important;font-weight:600;line-height:1.18}
+.section .card,.formwrap{border-radius:24px!important;border:1px solid #e4e6da!important;box-shadow:0 18px 55px #183b2b14;background:#fffdfa!important}
+.section .card{position:relative;overflow:hidden;padding:30px!important}
+.section .card:before{content:'';display:block;height:170px;background:url('https://commons.wikimedia.org/wiki/Special:Redirect/file/KCD0_-_Komplek_Candi_Dieng_-_Arjuna_View.jpg') center 42% /cover,#d8e1d2;border-radius:16px;margin-bottom:24px;filter:saturate(.68)}
+.section .card:nth-child(2):before{background-image:url('https://commons.wikimedia.org/wiki/Special:Redirect/file/Area_Candi_Arjuna_Dieng.jpg')}
+.section .card:nth-child(3):before{background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Sunrise_di_Bukit_Sikunir.jpg/1280px-Sunrise_di_Bukit_Sikunir.jpg')}
+.section .card h3{font-size:1.27rem!important;color:#173d31;font-family:'Playfair Display',Georgia,serif}
+.section .card p{color:#596d60;line-height:1.7}
+.section#proses{background:#e7ecdf!important;position:relative}
+.section#proses:before{content:'';position:absolute;inset:0;opacity:.035;pointer-events:none;background-image:repeating-linear-gradient(45deg,#174f3c 0 2px,transparent 2px 22px)}
+.section#proses .steps div{border:1px solid #d8ded0;background:#fffefa!important;box-shadow:0 9px 30px #153e2910;padding:26px!important;border-radius:20px!important;font-weight:700}
+.section#proses .steps div:before{content:'✦';display:block;color:#b58a3f;font-size:23px;margin-bottom:10px}
+.section#proses p{line-height:1.75}
+#daftar .formwrap{padding:clamp(24px,4vw,44px)!important}
+#daftar h2{margin-bottom:14px}
+#daftar .muted{line-height:1.75}
+#daftar input,#daftar select,#daftar textarea{border-radius:12px!important;background:#fff!important;min-height:50px!important;border:1px solid #d4dccf!important}
+#daftar input:focus,#daftar select:focus,#daftar textarea:focus{outline:3px solid #e2c67d99}
+#daftar button{border-radius:999px;padding:15px 25px}
+#registration-state{border-radius:14px}
+.foot{background:#103e30!important;color:#e4ecdf!important;padding:50px 0!important}
+.foot a{color:#eac778}
+.ethnic-marker{display:block;color:#ca9850;text-transform:uppercase;font-size:.76rem;font-weight:800;letter-spacing:.22em;margin-bottom:12px}
+.featured-scenery{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:24px;margin:50px auto 15px}
+.featured-scenery figure{margin:0;position:relative;min-height:340px;border-radius:26px;overflow:hidden;box-shadow:0 22px 45px #17352b26;background-color:#3c6851;background-size:cover;background-position:center}
+.featured-scenery figure:first-child{background-image:linear-gradient(180deg,transparent 50%,rgba(10,40,30,.80)),url('https://commons.wikimedia.org/wiki/Special:Redirect/file/KCD0_-_Komplek_Candi_Dieng_-_Arjuna_View.jpg')}
+.featured-scenery figure:last-child{background-image:linear-gradient(180deg,transparent 50%,rgba(10,40,30,.80)),url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Sunrise_di_Bukit_Sikunir.jpg/1280px-Sunrise_di_Bukit_Sikunir.jpg')}
+.featured-scenery figcaption{position:absolute;left:27px;bottom:22px;font:600 1.45rem 'Playfair Display',Georgia,serif;color:white;text-shadow:0 2px 12px #0007}
+.source-credit{font-size:11px;color:#6d7b72;text-align:right;margin-top:15px}
+@keyframes slow-pan{from{transform:scale(1.03)}to{transform:scale(1.12) translateX(-1.5%)}}
+@media(max-width:800px){header{padding:10px 20px!important}header nav{display:none}header>a:after{font-size:10px}.brand-logo{width:72px;height:56px}.hero{min-height:600px}.hero>.wrap{padding:74px 20px 92px}.hero:before{background-image:linear-gradient(90deg,rgba(12,45,34,.89),rgba(12,45,34,.52)),url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Sunrise_di_Bukit_Sikunir.jpg/1280px-Sunrise_di_Bukit_Sikunir.jpg')}.hero h1{font-size:clamp(2.6rem,10vw,4rem)!important}.featured-scenery{grid-template-columns:1fr}.featured-scenery figure{min-height:300px}.section{padding-top:55px!important;padding-bottom:55px!important}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
