@@ -1,0 +1,8 @@
+{
+  "name": "dienginep-fprs-cloudflare",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "build": "mkdir -p dist && cp site/index.html site/ketentuan.html site/privasi.html dist/"
+  }
+}
